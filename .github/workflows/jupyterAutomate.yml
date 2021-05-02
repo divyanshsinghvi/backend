@@ -46,10 +46,11 @@ jobs:
         #cat $GITHUB_PATH
         Rscript -e 'print("Hello")'
         Rscript -e '.libPaths()'
+        echo "invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")), unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":") ))))" >> .Rprofile 
         #cat `which R`
         #ls -la /usr/lib/R/library
         #ls -la /usr/local/lib/R/site-library
-        ls -la ../ 
+        #ls -la ../ 
         cat state_data/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
