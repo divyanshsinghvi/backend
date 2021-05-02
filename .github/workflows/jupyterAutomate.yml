@@ -41,6 +41,7 @@ jobs:
         echo $R_LIBS
         export R_LIBS=$R_LIBS:`pwd`/state_data/temp/usr/local/lib/R/site-library
         export R_LIBS_USER=$R_LIBS_USER:`pwd`/state_data/temp/usr/local/lib/R/site-library
+        export R_LIBS_SITE=$R_LIBS_SITE:`pwd`/state_data/temp/usr/local/lib/R/site-library
         echo ${{ env.R_LIBS_USER }}
         echo $R_LIBS
         echo $R_LIBS_USER
