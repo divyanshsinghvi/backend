@@ -37,6 +37,10 @@ jobs:
         #if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
         echo $GITHUB_PATH
         echo "./temp/usr/local/lib/" >> $GITHUB_PATH
+        cat $GITHUB_PATH
+        Rscript -e 'print("Hello")'
+        Rscript -e 'library(EpiEstim)'
+        
         
         
 #    - name: Run unified scripts
