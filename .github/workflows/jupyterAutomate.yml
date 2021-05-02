@@ -49,7 +49,7 @@ jobs:
         #cat `which R`
         #ls -la /usr/lib/R/library
         #ls -la /usr/local/lib/R/site-library
-        ls -la ./ 
+        ls -la ../ 
         cat state_data/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
