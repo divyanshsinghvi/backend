@@ -45,6 +45,8 @@ jobs:
         echo ${{ env.R_LIBS_USER }}
         echo $R_LIBS
         echo $R_LIBS_USER
+        ls -la /home/runner/work/_temp/
+        ls -la /opt/R/3.6.1/lib/R/
         #cat $GITHUB_PATH
         #Rscript -e 'install.packages("EpiEstim")'
         Rscript -e '.libPaths()'
