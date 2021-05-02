@@ -23,7 +23,7 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install ipython
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
     - name: Run unified scripts
       run: |
         cd state_data/ && ipython3 colab_unified_states_metrics.py
