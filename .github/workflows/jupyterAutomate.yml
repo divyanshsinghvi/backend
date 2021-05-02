@@ -13,18 +13,30 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7]
+        R-version: [ '3.6.1' ]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+    - uses: r-lib/actions/setup-r@v1
+      name: Set up R ${{ matrix.R-version }}
+      with:
+        r-version: ${{ matrix.R-version }} 
+    - name: Install dependencies
+      run: |
+        install.packages(c("remotes"))
+        remotes::install_deps(dependencies = TRUE)
+        remotes::install_cran("covr")
+      shell: Rscript {0}
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
         pip3 install ipython
         if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
         echo ${{ env.R_LIBS_USER }}
+        
         
 #    - name: Run unified scripts
 #      run: |
