@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7]
-        R-version: [ '3.6.1' ]
+        R-version: [ '3.6.3' ]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -36,7 +36,6 @@ jobs:
         #pip3 install ipython
         #if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
         echo $GITHUB_PATH
-        #echo "./temp/usr/local/lib/" >> $GITHUB_PATH
         echo `pwd`
         echo $R_LIBS
         export R_LIBS=$R_LIBS:`pwd`/state_data/temp/usr/local/lib/R/site-library
@@ -45,18 +44,13 @@ jobs:
         echo ${{ env.R_LIBS_USER }}
         echo $R_LIBS
         echo $R_LIBS_USER
-        #ls -la /home/runner/work/_temp/
-        #ls -la /opt/R/3.6.1/lib/R/
         unzip -o state_data/libraries.zip -d ./temp
         cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
-        #cat $GITHUB_PATH
         #Rscript -e 'install.packages("EpiEstim")'
         Rscript -e '.libPaths()'
-        #echo 'invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")), unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":") ))))' >> .Rprofile 
+        echo 'invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")), unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":") ))))' >> ~/.Rprofile 
+        Rscript -e '.libPaths()'
         #cat `which R`
-        #ls -la /usr/lib/R/library
-        #ls -la /usr/local/lib/R/site-library
-        #ls -la ../ 
         #cat state_data/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
