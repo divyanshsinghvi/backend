@@ -39,8 +39,8 @@ jobs:
         #echo "./temp/usr/local/lib/" >> $GITHUB_PATH
         echo `pwd`
         echo $R_LIBS
-        export R_LIBS=$R_LIBS:`pwd`/temp/usr/local/lib/R/site-library
-        export R_LIBS_USER=$R_LIBS_USER:`pwd`/temp/usr/local/lib/R/site-library
+        export R_LIBS=$R_LIBS:`pwd`/state_data/temp/usr/local/lib/R/site-library
+        export R_LIBS_USER=$R_LIBS_USER:`pwd`/state_data/temp/usr/local/lib/R/site-library
         echo $R_LIBS
         echo $R_LIBS_USER
         #cat $GITHUB_PATH
@@ -49,7 +49,7 @@ jobs:
         #cat `which R`
         #ls -la /usr/lib/R/library
         #ls -la /usr/local/lib/R/site-library
-        cat .Rprofile
+        cat state_data/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
         
