@@ -44,7 +44,6 @@ jobs:
         echo ${{ env.R_LIBS_USER }}
         echo $R_LIBS
         echo $R_LIBS_USER
-        cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
         ls -l /home/runner/work/_temp/Library/*
         #Rscript -e 'install.packages("EpiEstim")'
         Rscript -e '.libPaths()'
@@ -53,6 +52,7 @@ jobs:
         #cat `which R`
         #cat state_data/.Rprofile
         Rscript -e 'library(EpiEstim)'
+        cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
         unzip -o state_data/libraries.zip -d ./temp
         
         
