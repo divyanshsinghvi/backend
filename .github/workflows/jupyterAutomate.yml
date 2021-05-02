@@ -40,6 +40,7 @@ jobs:
         cat $GITHUB_PATH
         Rscript -e 'print("Hello")'
         Rscript -e '.libPaths()'
+        ls -la /usr/lib/R/library
         cat ~/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
