@@ -50,8 +50,9 @@ jobs:
         Rscript -e '.libPaths()'
         #cat `which R`
         #cat state_data/.Rprofile
+        ls -la /opt/R/4.0.5/lib/R/library/
+        ls -la /home/runner/work/_temp/Library/
         Rscript -e 'library(EpiEstim)'
-        ls -l /home/runner/work/_temp/Library/*
         cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
         unzip -o state_data/libraries.zip -d ./temp
         
