@@ -1,8 +1,21 @@
-# -*- coding: utf-8 -*-
-"""Copy of Copy of colab_unified_states_metrics_new.ipynb
+#!/usr/bin/env python3.8
+# coding: utf-8
 
-!pip install wget
-!pip install urllib3
+# In[1]:
+
+
+get_ipython().system(u'pip3 install wget')
+get_ipython().system(u'pip3 install urllib3')
+
+
+# In[2]:
+
+
+get_ipython().system(u'pwd')
+
+
+# In[3]:
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,13 +34,25 @@ from urllib.request import urlopen
 import copy
 import collections
 
-if os.path.exists("test.json"):
-  os.remove("test.json")
 
-wget.download('https://raw.githubusercontent.com/covid19india/api/gh-pages/v4/min/data-all.min.json', os.path.join(os.getcwd(),'test.json')) 
+# In[4]:
+
+
+# if os.path.exists("test.json"):
+#   os.remove("test.json")
+
+# wget.download('https://raw.githubusercontent.com/covid19india/api/gh-pages/v4/min/data-all.min.json', os.path.join(os.getcwd(),'test.json'))
+
+
+# In[5]:
+
 
 def convert(dat): 
     return datetime.strptime(dat, '%Y-%m-%d').strftime('%d %B')
+
+
+# In[6]:
+
 
 # maybe helpful 
 
@@ -38,12 +63,20 @@ def split_date_json(pos_rate_json,state):
   df.columns=['date','month']
   return df
 
+
+# In[7]:
+
+
 #dataset=pd.read_csv('https://raw.githubusercontent.com/CovidToday/backend/master/testing-and-cfr/population.csv')
 dataset=pd.read_csv('population.csv')
 population=pd.DataFrame()
 population["State"]=dataset['State'][:37]
 population["Population"]=dataset['Population'][:37]
 population=population.set_index('State')
+
+
+# In[8]:
+
 
 state_id = {
   "TT":"India",
@@ -84,12 +117,24 @@ state_id = {
   "SK":"Sikkim",
 }
 
+
+# In[9]:
+
+
 def dates_gen(periods=7):
   t = pd.Series(pd.date_range(end = datetime.now(pytz.timezone('Asia/Kolkata'))-timedelta(1), periods = periods)).dt.strftime('%Y-%m-%d').tolist()
 
   return t
 
+
+# In[10]:
+
+
 t=dates_gen()
+
+
+# In[11]:
+
 
 from datetime import datetime
 x=datetime.today()
@@ -103,13 +148,16 @@ for w in range (len(dates)):
   if len(dates[w]):
     dates1.append(convert(dates[w]))
 
+
+# In[12]:
+
+
 test=json.load(open('test.json'))
 test['2021-04-05']['AN'].keys()
 
-"""# Positive Rate (All metrics)
 
-## GroundZero
-"""
+# In[13]:
+
 
 start=datetime.now()
 states={}
@@ -293,10 +341,22 @@ for j in state_id.keys():
       
 states['datetime']=str(datetime.now(pytz.timezone('Asia/Kolkata')))
 
+
+# In[14]:
+
+
 with open('positivity_Rate_new.json', 'w') as outfile:
-  json.dump(states, outfile,indent=4)
+  json.dump(states, outfile)
+
+
+# In[15]:
+
 
 temp1 = json.load(open('positivity_Rate_new.json'))
+
+
+# In[16]:
+
 
 n_states = len(state_id.keys())
 n_dates = len(dates)
@@ -305,7 +365,9 @@ rows = n_states*n_dates
 
 rows
 
-"""# CSV"""
+
+# In[17]:
+
 
 n_states = len(state_id.keys())
 n_dates = len(dates[:-1])
@@ -342,9 +404,15 @@ df['daily_deceased_ma'] = csv_daily_deceased_ma[:rows]
 
 df_to_concat = copy.deepcopy(df)
 
+
+# In[18]:
+
+
 df.columns
 
-"""# CFR"""
+
+# In[19]:
+
 
 #dates = np.array([pd.to_datetime(i['date']) for i in filter(lambda v: v['status'] == 'Confirmed',json.load(open('states.json',))['states_daily'])])
 #print(dates)
@@ -358,9 +426,17 @@ for s in state_id.keys():
     data_deceased[st] = np.array(states[st]['daily_deceased'])
     data_recovered[st] = np.array(states[st]['daily_recovered'])
 
+
+# In[20]:
+
+
 def n2z(x):
     x[np.logical_or(np.isnan(x),np.isinf(x))] = 0
     return x
+
+
+# In[21]:
+
 
 data_recovered = data_recovered.replace(r'^\s*$', np.NaN, regex=True).fillna(0)
 data_recovered = data_recovered.astype(np.int32)
@@ -372,7 +448,15 @@ data_deceased['date'] = dates[:-1]    #__Changed
 data_recovered['date'] = dates[:-1]   #__Changed
 data_confirmed['date'] = dates[:-1]   #__Changed
 
+
+# In[22]:
+
+
 dates[-1]
+
+
+# In[23]:
+
 
 json_data={}
 cfr = pd.DataFrame()
@@ -444,15 +528,25 @@ for st in state_id.keys():
     plt.plot(temp['cfr3_point'],label=state)
 plt.legend()
 
+
+# In[24]:
+
+
 #cfr.to_csv('cfr.csv',index=False)
 from datetime import datetime
 json_data['datetime']=str(datetime.now(pytz.timezone('Asia/Kolkata')))
+
+
+# In[25]:
+
 
 json_data_indented = json.dumps(json_data, indent = 4)
 #with open("cfr.json", "w") as outfile: 
 #    outfile.write(json_data_indented)
 
-"""# Doubling Rate"""
+
+# In[26]:
+
 
 def calc_doublingtimes(x):
     vals = []
@@ -464,6 +558,10 @@ def calc_doublingtimes(x):
         return 0,0,0
     return np.median(vals),np.quantile(vals,0.025),np.quantile(vals,0.975)
 
+
+# In[27]:
+
+
 start=datetime.now()
 x=datetime.now(pytz.timezone('Asia/Kolkata')).date()
 dd=pd.date_range(start="2020-01-30",end=x)
@@ -471,10 +569,18 @@ datess=[]
 for i in range(len(dd)):
   datess.append((str(dd[i])[:10]))
 
+
+# In[28]:
+
+
 dates1=[]
 for w in range (len(dates)):
   if len(dates[w]):
     dates1.append(convert(datess[w]))
+
+
+# In[29]:
+
 
 json_data={}
 
@@ -500,12 +606,16 @@ for j in state_id.keys():
             }
     states[st].update(json_data[st])
 
-"""# Rt Calculation"""
+
+# In[30]:
+
 
 #!unzip libraries.zip -d ./temp
-!unzip -o libraries.zip -d /
+get_ipython().system(u'unzip -o libraries.zip -d /')
 
-!ls /usr/local/lib/R/site-library
+
+# In[31]:
+
 
 data_recovered = pd.DataFrame()
 data_deceased = pd.DataFrame()
@@ -515,6 +625,10 @@ for s in state_id.keys():
     data_confirmed[st] = np.array(states[st]['daily_positive_cases'])
     data_deceased[st] = np.array(states[st]['daily_deceased'])
     data_recovered[st] = np.array(states[st]['daily_recovered'])
+
+
+# In[32]:
+
 
 #dates = dates1[:-1]
 data_recovered = data_recovered.replace(r'^\s*$', np.NaN, regex=True).fillna(0)
@@ -527,8 +641,15 @@ data_deceased['date'] = dates
 data_recovered['date'] = dates
 data_confirmed['date'] = dates
 
-# Commented out IPython magic to ensure Python compatibility.
-# %matplotlib inline
+
+# In[33]:
+
+
+get_ipython().magic(u'matplotlib inline')
+
+
+# In[35]:
+
 
 rt_json = {}
 
@@ -543,7 +664,7 @@ for st in list(state_id.keys()):
     temp.to_csv('confirmed.csv')
     
     #os.system("Rscript.exe scripts/Rt_analysis_newGT_TJ.R")  #Changed
-    !Rscript "scripts/Rt_analysis_newGT_TJ.R"
+    get_ipython().system(u'Rscript "scripts/Rt_analysis_newGT_TJ.R"')
     
     values = {
 
@@ -584,15 +705,23 @@ for st in list(state_id.keys()):
     plt.legend()
     plt.show()
 
+
+# In[36]:
+
+
 for st in state_id.keys():
     state = state_id[st]
     states[state].update(rt_json[st])
 
-#rt.to_csv('rt.csv',index=False)
+
+# In[37]:
+
 
 temp1 = json.load(open('positivity_Rate_new.json'))
 
-"""##Rt Shifting"""
+
+# In[38]:
+
 
 def shift_rt_metrics(dict,key,days=9):
   arr = copy.deepcopy(dict[key])
@@ -607,6 +736,11 @@ def shift_rt_metrics(dict,key,days=9):
     new_val[size-1-i]=''
 
   return new_val
+ 
+
+
+# In[39]:
+
 
 rt_json_shifted = copy.deepcopy(rt_json)
 
@@ -618,7 +752,11 @@ for st in state_id.keys():
     rt_json_shifted[st]['rt_u95'] = shift_rt_metrics(rt_json[st],'rt_u95',2)
     rt_json_shifted[st]['rt_l50'] = shift_rt_metrics(rt_json[st],'rt_l50',2)
     rt_json_shifted[st]['rt_u50'] = shift_rt_metrics(rt_json[st],'rt_u50',2)
-    rt_json_shifted[st]['t_end'] = shift_rt_metrics(rt_json[st],'t_end',2)
+    rt_json_shifted[st]['t_end'] = shift_rt_metrics(rt_json[st],'t_end',2) 
+
+
+# In[40]:
+
 
 for st in state_id.keys():
     state = state_id[st]
@@ -631,11 +769,19 @@ for st in state_id.keys():
                 
     rt_json_shifted[st]['dates'] = dates
 
+
+# In[41]:
+
+
 states_shifted = copy.deepcopy(states)
 
 for st in state_id.keys():
     state = state_id[st]
     states_shifted[state].update(rt_json_shifted[st])
+
+
+# In[42]:
+
 
 for st in state_id.keys():
     for key in rt_json[st].keys():
@@ -643,6 +789,10 @@ for st in state_id.keys():
         rt_json[st][key]=rt_json[st][key].tolist()
       except:
         pass
+
+
+# In[43]:
+
 
 for st in state_id.keys():
     state = state_id[st]
@@ -653,6 +803,10 @@ for st in state_id.keys():
       except:
         pass
 
+
+# In[44]:
+
+
 for st in state_id.keys():
     state = state_id[st]
     leng = len(temp1['India']['dates'])
@@ -660,7 +814,11 @@ for st in state_id.keys():
     
     for keys in list(states[state].keys())[1:]:
         if len(states[state][keys])<leng:
-            states[state][keys].extend(['' for i in range(leng-len(states[state][keys]))])
+            states[state][keys].extend(['' for i in range(leng-len(states[state][keys]))]) 
+
+
+# In[45]:
+
 
 for st in state_id.keys():
     state = state_id[st]
@@ -669,15 +827,12 @@ for st in state_id.keys():
     
     for keys in list(states_shifted[state].keys())[1:]:
         if len(states_shifted[state][keys])<leng:
-            states_shifted[state][keys].extend(['' for i in range(leng-len(states_shifted[state][keys]))])
+            states_shifted[state][keys].extend(['' for i in range(leng-len(states_shifted[state][keys]))]) 
 
-"""## Rt changes for review"""
 
-#with open('rt_shifted.json', 'w') as outfile:
-#  json.dump(rt_json_shifted, outfile,indent=4)
+# In[46]:
 
-#with open('rt.json', 'w') as outfile:
-#  json.dump(rt_json, outfile,indent=4)
+
 
 rt_graph = copy.deepcopy(rt_json_shifted)
 
@@ -688,8 +843,16 @@ for st in state_id.keys():
     for k in rt_json_shifted[st].keys():
         rt_graph[st][k] = rt_json_shifted[st][k][:-10]
 
+
+# In[47]:
+
+
 with open('rt_graph.json', 'w') as outfile:
-  json.dump(rt_graph, outfile,indent=4)
+  json.dump(rt_graph, outfile)
+
+
+# In[48]:
+
 
 '''
 vals = min(len(df_to_concat),len(cfr),len(rt))
@@ -701,13 +864,23 @@ df_list = [one,two]
 all_dataframes = pd.concat([two,three],axis=1)
 all_dataframes.to_csv('allmetrics_state.csv',index=False)'''
 
-"""#Pooling"""
+
+# In[49]:
+
 
 print("No of days of data present: ",len(dates))
 print("Data rows for state dict: ",len(states['India']['dbt_u95']))
 print("No. of states : ",len(states.keys())-1)
 
+
+# In[50]:
+
+
 print("Date updated : ",states['datetime'])
+
+
+# In[51]:
+
 
 cols=list(states['India'].keys())
 
@@ -726,6 +899,10 @@ for i in keys:
     temp[j]=list(states[i][j])
   complete = pd.concat([complete,temp])
 
+
+# In[52]:
+
+
 cols=list(states_shifted['India'].keys())
 q=['state']
 complete_shifted=pd.DataFrame(columns=q+cols)
@@ -740,81 +917,39 @@ for i in keys:
     temp[j] = list(states_shifted[i][j])
   complete_shifted = pd.concat([complete_shifted,temp])
 
+
+# In[53]:
+
+
 complete_shifted.to_csv('allmetrics_states.csv',index=False)
 
-#complete.to_csv('com.csv',index=False)
+
+# In[54]:
+
 
 json_data_indented = json.dumps(json_data, indent = 4)
 #with open("doubling_rate.json", "w") as outfile: 
 #    outfile.write(json_data_indented)
 
+
+# In[55]:
+
+
 states_indented = json.dumps(states, indent = 4)
 #with open("covidtoday.json", "w") as outfile: 
 #    outfile.write(states_indented)
+
+
+# In[56]:
+
 
 states_indented = json.dumps(states_shifted, indent = 4)
 with open("allmetrics_states.json", "w") as outfile: 
     outfile.write(states_indented)
 
-"""# Git upload"""
 
-!pip install PyGithub
-
-rt_graph.keys()
-
-from github import Github
-from github import InputGitTreeElement
+# In[ ]:
 
 
-file_list = [states_indented,
-             json.dumps(rt_graph)]
 
-file_names = ['state_data/allmetrics_states.json',
-              'state_data/rt_graph.json'
-            ]
 
-token = ''
-
-Repo = 'backend'
-#branch = 'colab-test'
-branch = 'master'
-
-commit_message = ""
-
-if commit_message == "":
-  commit_message = "Data Updated - "+ datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%Y-%m-%d %H:%M:%S')
-
-#rand  = random.random()
-#d = {'col1': [rand,25,25], 'col2': [4, 5, 6]}
-#df = pd.DataFrame(d)
-#convert pd.df to text. This avoids writing the file as csv to local and again reading iter
-
-g = Github(token)
-
-#g = Github(userid,pwd)
-
-#repo = g.get_user().get_repo(Repo)
-org = "CovidToday"
-repo = g.get_organization(org).get_repo(Repo)
-master_ref = repo.get_git_ref("heads/"+branch)
-master_sha = master_ref.object.sha
-base_tree = repo.get_git_tree(master_sha)
-element_list = list()
-
-for i in range(0,len(file_list)):
-  element = InputGitTreeElement(file_names[i],'100644','blob',file_list[i])
-  element_list.append(element)
-
-tree = repo.create_git_tree(element_list, base_tree)
-parent = repo.get_git_commit(master_sha)
-commit = repo.create_git_commit(commit_message, tree, [parent])
-master_ref.edit(commit.sha)
-
-print('Update complete')
-
-"""# Download zip"""
-
-!zip -r /content/backend/state_data/state.zip /content/backend/state_data
-
-from google.colab import files
-#files.download("state.zip")
