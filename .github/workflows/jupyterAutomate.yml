@@ -39,8 +39,8 @@ jobs:
         echo "./temp/usr/local/lib/" >> $GITHUB_PATH
         cat $GITHUB_PATH
         Rscript -e 'print("Hello")'
-        cat ~/.Rprofile
         Rscript -e '.libPaths()'
+        cat ~/.Rprofile
         Rscript -e 'library(EpiEstim)'
         
         
