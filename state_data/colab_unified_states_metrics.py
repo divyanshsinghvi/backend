@@ -610,8 +610,9 @@ for j in state_id.keys():
 # In[30]:
 
 
+print("Unzipping R lib... ")
 #!unzip libraries.zip -d ./temp
-get_ipython().system(u'unzip -o libraries.zip -d /')
+get_ipython().system(u'unzip -o libraries.zip -d ./temp')
 
 
 # In[31]:
