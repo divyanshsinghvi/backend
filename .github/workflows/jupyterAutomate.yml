@@ -15,7 +15,7 @@ jobs:
         python-version: [3.7]
         R-version: [ '3.6.1' ]
     steps:
-    #- uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -45,8 +45,10 @@ jobs:
         echo ${{ env.R_LIBS_USER }}
         echo $R_LIBS
         echo $R_LIBS_USER
-        ls -la /home/runner/work/_temp/
-        ls -la /opt/R/3.6.1/lib/R/
+        #ls -la /home/runner/work/_temp/
+        #ls -la /opt/R/3.6.1/lib/R/
+        unzip -o state_data/libraries.zip -d ./temp
+        cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
         #cat $GITHUB_PATH
         #Rscript -e 'install.packages("EpiEstim")'
         Rscript -e '.libPaths()'
