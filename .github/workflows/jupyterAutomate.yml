@@ -45,7 +45,7 @@ jobs:
         echo $R_LIBS
         echo $R_LIBS_USER
         #cat $GITHUB_PATH
-        Rscript -e 'install.packages("EpiEstim")'
+        #Rscript -e 'install.packages("EpiEstim")'
         Rscript -e '.libPaths()'
         #echo 'invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")), unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":") ))))' >> .Rprofile 
         #cat `which R`
