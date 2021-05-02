@@ -2,8 +2,6 @@ numpy
 pandas
 ipython
 matplotlib
-subprocess
 scikit-learn
-json
 wget
 pytz
