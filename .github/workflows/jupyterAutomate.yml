@@ -45,8 +45,8 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
-        zip -s 0 my_r_lib.zip --out unsplit.zip
-        sudo unzip -o unsplit.zip -d /
+        #zip -s 0 my_r_lib.zip --out unsplit.zip
+        #sudo unzip -o unsplit.zip -d /
         sudo apt-get install libcurl4-openssl-dev r-base
         R --version
         sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
