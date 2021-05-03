@@ -665,7 +665,7 @@ for st in list(state_id.keys()):
     temp.to_csv('confirmed.csv')
     
     #os.system("Rscript.exe scripts/Rt_analysis_newGT_TJ.R")  #Changed
-    get_ipython().system(u'Rscript "scripts/Rt_analysis_newGT_TJ.R"')
+    get_ipython().system(u'sudo -i Rscript "scripts/Rt_analysis_newGT_TJ.R"')
     
     values = {
 
