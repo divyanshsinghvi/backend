@@ -43,7 +43,7 @@ jobs:
       with:
         add: allmetrics_states.csv allmetrics_states.json rt_graph.json test.json
         author_name: GithubActions States Update
-        author_email: @gmail.com
+        author_email: covidtodayindia@gmail.com
         message: 'States Data Updated'
 
 
