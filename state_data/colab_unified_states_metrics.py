@@ -38,10 +38,10 @@ import collections
 # In[4]:
 
 
-# if os.path.exists("test.json"):
-#   os.remove("test.json")
+if os.path.exists("test.json"):
+   os.remove("test.json")
 
-# wget.download('https://raw.githubusercontent.com/covid19india/api/gh-pages/v4/min/data-all.min.json', os.path.join(os.getcwd(),'test.json'))
+wget.download('https://raw.githubusercontent.com/covid19india/api/gh-pages/v4/min/data-all.min.json', os.path.join(os.getcwd(),'test.json'))
 
 
 # In[5]:
@@ -541,7 +541,7 @@ json_data['datetime']=str(datetime.now(pytz.timezone('Asia/Kolkata')))
 # In[25]:
 
 
-json_data_indented = json.dumps(json_data, indent = 4)
+json_data_indented = json.dumps(json_data)
 #with open("cfr.json", "w") as outfile: 
 #    outfile.write(json_data_indented)
 
@@ -929,7 +929,7 @@ complete_shifted.to_csv('allmetrics_states.csv',index=False)
 # In[54]:
 
 
-json_data_indented = json.dumps(json_data, indent = 4)
+json_data_indented = json.dumps(json_data)
 #with open("doubling_rate.json", "w") as outfile: 
 #    outfile.write(json_data_indented)
 
@@ -937,7 +937,7 @@ json_data_indented = json.dumps(json_data, indent = 4)
 # In[55]:
 
 
-states_indented = json.dumps(states, indent = 4)
+states_indented = json.dumps(states)
 #with open("covidtoday.json", "w") as outfile: 
 #    outfile.write(states_indented)
 
@@ -945,7 +945,7 @@ states_indented = json.dumps(states, indent = 4)
 # In[56]:
 
 
-states_indented = json.dumps(states_shifted, indent = 4)
+states_indented = json.dumps(states_shifted)
 with open("allmetrics_states.json", "w") as outfile: 
     outfile.write(states_indented)
 
