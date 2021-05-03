@@ -39,13 +39,16 @@ jobs:
         sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         sudo Rscript -e ".libPaths()"
         sudo Rscript -e "library(EpiEstim)"
+        pwd
+        zip -r a.zip /usr/local/lib/R/site-library/
+        ls
         cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
         git status -uno
-    #- uses: EndBug/add-and-commit@v7
-      #with:
-        #add: test.json
-        #author_name: Divyansh Singhvi
-        #author_email: divyanshsinghvi@gmail.com
-        #message: 'Lets Commit zip'
+    - uses: EndBug/add-and-commit@v7
+      with:
+        add: a.zip
+        author_name: Divyansh Singhvi
+        author_email: divyanshsinghvi@gmail.com
+        message: 'Lets Commit zip'
 
 
