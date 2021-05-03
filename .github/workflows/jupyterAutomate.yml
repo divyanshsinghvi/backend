@@ -27,4 +27,4 @@ jobs:
         if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
     - name: Run unified scripts
       run: |
-        cd state_data/ && ipython3 colab_unified_states_metrics.py
+        cd state_data/ && sudo -i ipython3 colab_unified_states_metrics.py
