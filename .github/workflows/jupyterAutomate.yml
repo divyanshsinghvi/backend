@@ -25,7 +25,7 @@ jobs:
         python3 -m pip install --upgrade pip
         pip3 install ipython
         if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
-    - name: Run unified scripts
+    - name: Install R Lib
       run: |
         R --version
         zip -s 0 my_r_lib.zip --out unsplit.zip
@@ -34,7 +34,11 @@ jobs:
         R --version
         sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
         sudo Rscript -e "library(EpiEstim)"
+    - name: Run unified scripts
+      run: |
         cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
+    - name: Get New Files
+      run: |
         git status -uno
     #- uses: EndBug/add-and-commit@v7
       #with:
