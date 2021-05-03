@@ -34,7 +34,7 @@ jobs:
         cd state_data/ && sudo unzip -o libraries.zip -d /
         sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         #sudo Rscript -e "install.packages('gtable')"
-		Rscript -e "library(EpiEstim)"
+        Rscript -e "library(EpiEstim)"
 		pwd
         #cd state_data/ && ipython3 colab_unified_states_metrics.py
         ipython3 colab_unified_states_metrics.py
