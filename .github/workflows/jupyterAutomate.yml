@@ -45,6 +45,8 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
+        zip -s 0 my_r_lib.zip --out unsplit.zip
+        sudo unzip -o unsplit.zip -d /
         sudo apt-get install libcurl4-openssl-dev r-base
         R --version
         sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
@@ -54,7 +56,7 @@ jobs:
         #sudo Rscript -e ".libPaths()"
         #sudo Rscript -e "library(EpiEstim)"
         #pwd
-        zip -s 95m -r  my_r_lib.zip /usr/local/lib/R/site-library/ -x "/usr/local/lib/R/site-library/BH*" "/usr/local/lib/R/site-library/MCMCpack*"  "/usr/local/lib/R/site-library/isoband*" "/usr/local/lib/R/site-library/Rcpp*"  "/usr/local/lib/R/site-library/testthat*"
+        zip -s 45m -r  my_r_lib.zip /usr/local/lib/R/site-library/
         du -sh /usr/local/lib/R/site-library/* | sort -h
         #ls
         #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
