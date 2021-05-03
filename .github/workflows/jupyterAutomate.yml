@@ -15,49 +15,16 @@ jobs:
         python-version: [3.7]
         R-version: [ '4.0.5' ]
     steps:
-    #- uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
-    - uses: r-lib/actions/setup-r@v1
-      name: Set up R ${{ matrix.R-version }}
-      with:
-        r-version: ${{ matrix.R-version }} 
-    #- name: Install dependencies
-      #run: |
-        #install.packages(c("remotes"))
-        #remotes::install_deps(dependencies = TRUE)
-        #remotes::install_cran("covr")
-      #shell: Rscript {0}
     - name: Install dependencies
       run: |
-        #python3 -m pip install --upgrade pip
-        #pip3 install ipython
-        #if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
-        echo $GITHUB_PATH
-        echo `pwd`
-        echo $R_LIBS
-        export R_LIBS=$R_LIBS:`pwd`/state_data/temp/usr/local/lib/R/site-library
-        export R_LIBS_USER=$R_LIBS_USER:`pwd`/state_data/temp/usr/local/lib/R/site-library
-        export R_LIBS_SITE=$R_LIBS_SITE:`pwd`/state_data/temp/usr/local/lib/R/site-library
-        echo ${{ env.R_LIBS_USER }}
-        echo $R_LIBS
-        echo $R_LIBS_USER
-        #Rscript -e 'install.packages("EpiEstim")'
-        Rscript -e '.libPaths()'
-        echo 'invisible(.libPaths(c(unlist(strsplit(Sys.getenv("R_LIBS"), ":")), unlist(strsplit(Sys.getenv("R_LIBS_USER"), ":") ))))' >> ~/.Rprofile 
-        Rscript -e '.libPaths()'
-        #cat `which R`
-        #cat state_data/.Rprofile
-        ls -la /opt/R/4.0.5/lib/R/library/
-        ls -la /home/runner/work/_temp/Library/
-        Rscript -e 'library(EpiEstim)'
-        cp -r ./temp/usr/local/lib/R/site-library/* /home/runner/work/_temp/Library/
-        unzip -o state_data/libraries.zip -d ./temp
-        
-        
-        
-#    - name: Run unified scripts
-#      run: |
-#        cd state_data/ && ipython3 colab_unified_states_metrics.py
+        python3 -m pip install --upgrade pip
+        pip3 install ipython
+        if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
+    - name: Run unified scripts
+      run: |
+        cd state_data/ && ipython3 colab_unified_states_metrics.py

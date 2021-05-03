@@ -612,7 +612,7 @@ for j in state_id.keys():
 
 print("Unzipping R lib... ")
 #!unzip libraries.zip -d ./temp
-get_ipython().system(u'unzip -o libraries.zip -d ./temp')
+get_ipython().system(u'sudo unzip -o libraries.zip -d /')
 
 
 # In[31]:
