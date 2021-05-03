@@ -32,6 +32,6 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
-        Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         Rscript -e "library(EpiEstim)"
         #cd state_data/ && ipython3 colab_unified_states_metrics.py
