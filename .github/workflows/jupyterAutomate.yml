@@ -32,6 +32,7 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
+        sudo unzip -o a.zip -d /
         sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         Rscript -e "library(EpiEstim)"
         pwd
