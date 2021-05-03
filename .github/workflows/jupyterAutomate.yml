@@ -32,6 +32,16 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
-        sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
-        Rscript -e "library(EpiEstim)"
+        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        sudo Rscript -e "install.packages('gtable')"
+        #Rscript -e "library(EpiEstim)"
         cd state_data/ && ipython3 colab_unified_states_metrics.py
+        zip a.zip /usr/local/lib/R/site-library/*
+    - uses: EndBug/add-and-commit@v7
+      with:
+        add: a.zip 
+        author_name: Divyansh Singhvi
+        author_email: divyanshsinghvi@gmail.com
+        message: 'Lets Commit zip'
+
