@@ -45,16 +45,16 @@ jobs:
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
-        #zip -s 0 my_r_lib.zip --out unsplit.zip
-        #sudo unzip -o unsplit.zip -d /
+        zip -s 0 my_r_lib.zip --out unsplit.zip
+        sudo unzip -o unsplit.zip -d /
         sudo apt-get install libcurl4-openssl-dev r-base
         R --version
         sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
         #sudo unzip -o a.zip -d /
+        sudo Rscript -e "install.packages('Rcpp',dependencies=TRUE)"
         #sudo Rscript -e "install.packages('BH')"
         #sudo Rscript -e "install.packages('MCMCpack')"
         #sudo Rscript -e "install.packages('isoband')"
-        #sudo Rscript -e "install.packages('Rcpp')"
         #sudo Rscript -e "install.packages('testthat')"
         #"/usr/local/lib/R/site-library/BH*" "/usr/local/lib/R/site-library/MCMCpack*"  "/usr/local/lib/R/site-library/isoband*" "/usr/local/lib/R/site-library/Rcpp*"  "/usr/local/lib/R/site-library/testthat*"
 
