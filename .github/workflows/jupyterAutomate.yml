@@ -37,10 +37,11 @@ jobs:
         Rscript -e "library(EpiEstim)"
         pwd
         zip a.zip /usr/local/lib/R/site-library/*
+        zip b.zip /usr/share/R/include/*
         cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
     - uses: EndBug/add-and-commit@v7
       with:
-        add: a.zip 
+        add: a.zip  b.zip
         author_name: Divyansh Singhvi
         author_email: divyanshsinghvi@gmail.com
         message: 'Lets Commit zip'
