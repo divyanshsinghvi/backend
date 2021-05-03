@@ -15,25 +15,22 @@ jobs:
         python-version: [3.7]
         R-version: [ '4.0.5' ]
     steps:
-    - name: Run unified scripts
-      run: |
-        R --version
-        #cd state_data/ && unzip -o libraries.zip -d /
-        R --version
-        ls -al /usr/local/lib/R/site-library/*
-        #sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
-        #sudo unzip -o a.zip -d /
-        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
-        #sudo Rscript -e ".libPaths()"
-        #sudo Rscript -e "library(EpiEstim)"
-        pwd
-        zip -r a.zip /usr/local/lib/R/site-library/
-        ls
-        cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
-        git status -uno
-    #- name: GoSudo
+    #- name: Run unified scripts
       #run: |
-        #sudo -i
+        #R --version
+        ##cd state_data/ && unzip -o libraries.zip -d /
+        #R --version
+        #ls -al /usr/local/lib/R/site-library/*
+        ##sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
+        ##sudo unzip -o a.zip -d /
+        ##sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        ##sudo Rscript -e ".libPaths()"
+        ##sudo Rscript -e "library(EpiEstim)"
+        #pwd
+        #zip -r a.zip /usr/local/lib/R/site-library/
+        #ls
+        #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
+        #git status -uno
     #- uses: actions/checkout@v2
     #- name: Set up Python ${{ matrix.python-version }}
       #uses: actions/setup-python@v2
@@ -44,27 +41,28 @@ jobs:
         #python3 -m pip install --upgrade pip
         #pip3 install ipython
         #if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
-    #- name: Run unified scripts
-      #run: |
-        #R --version
-        ##cd state_data/ && unzip -o libraries.zip -d /
-        #sudo apt-get install libcurl4-openssl-dev r-base
-        #R --version
-        #sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
+    - name: Run unified scripts
+      run: |
+        R --version
+        #cd state_data/ && unzip -o libraries.zip -d /
+        sudo apt-get install libcurl4-openssl-dev r-base
+        R --version
+        sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
         #sudo unzip -o a.zip -d /
-        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         #sudo Rscript -e ".libPaths()"
         #sudo Rscript -e "library(EpiEstim)"
         #pwd
-        #zip -r a.zip /usr/local/lib/R/site-library/
+        zip -r a.zip /usr/local/lib/R/site-library/EpiEstim/
+        du -sh /usr/local/lib/R/site-library/*
         #ls
         #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
         #git status -uno
-    #- uses: EndBug/add-and-commit@v7
-      #with:
-        #add: a.zip
-        #author_name: Divyansh Singhvi
-        #author_email: divyanshsinghvi@gmail.com
-        #message: 'Lets Commit zip'
+    - uses: EndBug/add-and-commit@v7
+      with:
+        add: a.zip
+        author_name: Divyansh Singhvi
+        author_email: divyanshsinghvi@gmail.com
+        message: 'Lets Commit zip'
 
 
