@@ -54,14 +54,14 @@ jobs:
         #sudo Rscript -e ".libPaths()"
         #sudo Rscript -e "library(EpiEstim)"
         #pwd
-        zip -r a.zip /usr/local/lib/R/site-library/ -x "/usr/local/lib/R/site-library/BH/*"
-        du -sh /usr/local/lib/R/site-library/*
+        zip -s 95m -r  my_r_lib.zip /usr/local/lib/R/site-library/ -x "/usr/local/lib/R/site-library/BH*" "/usr/local/lib/R/site-library/MCMCpack*"  "/usr/local/lib/R/site-library/isoband*" "/usr/local/lib/R/site-library/Rcpp*"  "/usr/local/lib/R/site-library/testthat*"
+        du -sh /usr/local/lib/R/site-library/* | sort -h
         #ls
         #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
         #git status -uno
     - uses: EndBug/add-and-commit@v7
       with:
-        add: a.zip
+        add: my_r_lib.*
         author_name: Divyansh Singhvi
         author_email: divyanshsinghvi@gmail.com
         message: 'Lets Commit zip'
