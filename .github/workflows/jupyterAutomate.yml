@@ -32,8 +32,8 @@ jobs:
       run: |
         R --version
         #cd state_data/ && sudo unzip -o libraries.zip -d /
-        sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
-        #sudo Rscript -e "install.packages('gtable')"
+        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
+        sudo Rscript -e "install.packages('gtable')"
         #Rscript -e "library(EpiEstim)"
         #cd state_data/ && ipython3 colab_unified_states_metrics.py
         pwd
@@ -44,5 +44,6 @@ jobs:
         add: a.zip 
         author_name: Divyansh Singhvi
         author_email: divyanshsinghvi@gmail.com
+        pull_strategy: 'NO-PULL or --no-rebase or --no-ff or --rebase'
         message: 'Lets Commit zip Final'
 
