@@ -54,7 +54,7 @@ jobs:
         #sudo Rscript -e ".libPaths()"
         #sudo Rscript -e "library(EpiEstim)"
         #pwd
-        zip -r a.zip /usr/local/lib/R/site-library/ -x "/usr/local/lib/R/site-library/BH/*"
+        zip -r a.zip /usr/local/lib/R/site-library/ -x "/usr/local/lib/R/site-library/BH"
         du -sh /usr/local/lib/R/site-library/*
         #ls
         #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
