@@ -18,20 +18,20 @@ jobs:
     #- name: GoSudo
       #run: |
         #sudo -i
-    #- uses: actions/checkout@v2
-    #- name: Set up Python ${{ matrix.python-version }}
-      #uses: actions/setup-python@v2
-      #with:
-        #python-version: ${{ matrix.python-version }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
-    #- name: Install dependencies
-      #run: |
-        #python3 -m pip install --upgrade pip
-        #pip3 install ipython
-        #if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }} # Version range or exact version of a Python version to use, using SemVer's version range syntax
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install ipython
+        if [ -f state_data/requirements.txt ]; then cd state_data/ && pip install -r requirements.txt; fi
     - name: Run unified scripts
       run: |
         R --version
         #cd state_data/ && unzip -o libraries.zip -d /
         sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
         Rscript -e "library(EpiEstim)"
-        #cd state_data/ && ipython3 colab_unified_states_metrics.py
+        cd state_data/ && ipython3 colab_unified_states_metrics.py

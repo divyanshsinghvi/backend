@@ -338,6 +338,7 @@ for j in state_id.keys():
                     'daily_deceased_ma':daily_deceased_ma[:-1]
 
                    }
+  # break
       
 states['datetime']=str(datetime.now(pytz.timezone('Asia/Kolkata')))
 
@@ -610,9 +611,9 @@ for j in state_id.keys():
 # In[30]:
 
 
-print("Unzipping R lib... ")
-#!unzip libraries.zip -d ./temp
-get_ipython().system(u'sudo unzip -o libraries.zip -d /')
+# print("Unzipping R lib... ")
+# #!unzip libraries.zip -d ./temp
+# get_ipython().system(u'sudo unzip -o libraries.zip -d /')
 
 
 # In[31]:
@@ -665,7 +666,7 @@ for st in list(state_id.keys()):
     temp.to_csv('confirmed.csv')
     
     #os.system("Rscript.exe scripts/Rt_analysis_newGT_TJ.R")  #Changed
-    get_ipython().system(u'sudo Rscript "scripts/Rt_analysis_newGT_TJ.R"')
+    get_ipython().system(u'Rscript "scripts/Rt_analysis_newGT_TJ.R"')
     
     values = {
 
