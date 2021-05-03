@@ -33,26 +33,9 @@ jobs:
         sudo apt-get install libcurl4-openssl-dev r-base
         R --version
         sudo Rscript -e "install.packages('curl',dependencies=TRUE)"
-        #sudo unzip -o a.zip -d /
-        #sudo Rscript -e "install.packages('Rcpp',dependencies=TRUE)"
-        #sudo Rscript -e "install.packages('BH')"
-        #sudo Rscript -e "install.packages('MCMCpack',dependencies=TRUE)"
-        #sudo Rscript -e "install.packages('isoband')"
-        #sudo Rscript -e "install.packages('testthat')"
-        #"/usr/local/lib/R/site-library/BH*" "/usr/local/lib/R/site-library/MCMCpack*"  "/usr/local/lib/R/site-library/isoband*" "/usr/local/lib/R/site-library/Rcpp*"  "/usr/local/lib/R/site-library/testthat*"
-
-        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
-        #sudo Rscript -e "install.packages('EpiEstim',dependencies=TRUE)"
-        #sudo Rscript -e "install.packages('EpiEstim')"
-        #sudo Rscript -e ".libPaths()"
         sudo Rscript -e "library(EpiEstim)"
-        #pwd
-        #rm my_r_lib*
-        #zip -s 45m -r  my_r_lib.zip /usr/local/lib/R/site-library/
-        #du -sh /usr/local/lib/R/site-library/* | sort -h
-        #ls
-        #cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
-        #git status -uno
+        cd state_data/ && ipython3 colab_unified_states_metrics.py && cd ../
+        git status -uno
     #- uses: EndBug/add-and-commit@v7
       #with:
         #add: my_r_lib.*
